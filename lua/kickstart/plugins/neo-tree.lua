@@ -3,6 +3,7 @@
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
+
   version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -14,12 +15,29 @@ return {
     { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal' } },
   },
   opts = {
-    filesystem = {
-      window = {
-        mappings = {
-          ['\\'] = 'close_window',
-        },
-      },
-    },
+    position = 'right',
   },
-}
+} -- OR setup with some options
+-- require('nvim-tree').setup {
+--   sort = {
+--     sorter = 'case_sensitive',
+--   },
+--   view = {
+--     width = 30,
+--     side = 'right',
+--   },
+--   renderer = {
+--     group_empty = true,
+--     highlight_opened_files = 'all',
+--   },
+--   filters = {
+--     dotfiles = true,
+--   },
+--   git = {
+--     enable = true,
+--     ignore = false,
+--   },
+-- }
+--
+-- local api = require 'nvim-tree.api'
+-- vim.keymap.set('n', '<leader>e', api.tree.toggle)

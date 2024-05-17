@@ -2,6 +2,8 @@
   - help lua-guide
   - https://neovim.io/doc/user/lua-guide.html
 --]]
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -125,7 +127,6 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'pocco81/auto-save.nvim',
-  'nvim-tree/nvim-tree.lua',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -272,7 +273,7 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>fa', builtin.find_files, { desc = '[F]ind [A]ll' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -475,6 +476,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
         angularls = {},
+        sqlls = {},
         --
 
         lua_ls = {
@@ -734,7 +736,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'angular', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'angular', 'sql', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -773,10 +775,10 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -813,42 +815,7 @@ require('lazy').setup({
 -- vim.opt.guicursor = ''
 vim.api.nvim_set_keymap('n', '<A-j>', '<C-d>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<A-k>', '<C-u>zz', { noremap = true })
-vim.api.nvim_set_keymap('i', '<A-e>', '{', { noremap = true })
-vim.api.nvim_set_keymap('i', '<A-r>', '}', { noremap = true })
+vim.api.nvim_set_keymap('i', '<A-d>', '{', { noremap = true })
+vim.api.nvim_set_keymap('i', '<A-f>', '}', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
-
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- optionally enable 24-bit colour
-vim.opt.termguicolors = true
-
--- empty setup using defaults
-require('nvim-tree').setup()
-
--- OR setup with some options
-require('nvim-tree').setup {
-  sort = {
-    sorter = 'case_sensitive',
-  },
-  view = {
-    width = 30,
-    side = 'right',
-  },
-  renderer = {
-    group_empty = true,
-    highlight_opened_files = 'all',
-  },
-  filters = {
-    dotfiles = true,
-  },
-  git = {
-    enable = true,
-    ignore = false,
-  },
-}
-
-local api = require 'nvim-tree.api'
-vim.keymap.set('n', '<leader>e', api.tree.toggle)
