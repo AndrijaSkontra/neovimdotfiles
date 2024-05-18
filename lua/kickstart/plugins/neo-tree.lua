@@ -1,43 +1,33 @@
--- Neo-tree is a Neovim plugin to browse the file system
--- https://github.com/nvim-neo-tree/neo-tree.nvim
-
 return {
   'nvim-neo-tree/neo-tree.nvim',
-
-  version = '*',
+  branch = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
   },
-  cmd = 'Neotree',
-  keys = {
-    { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal' } },
-  },
+  cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
   opts = {
-    position = 'right',
+    window = {
+      position = 'right',
+    },
+    git = {
+      enable = true,
+      ignore = false,
+    },
   },
-} -- OR setup with some options
--- require('nvim-tree').setup {
---   sort = {
---     sorter = 'case_sensitive',
---   },
---   view = {
---     width = 30,
---     side = 'right',
---   },
---   renderer = {
---     group_empty = true,
---     highlight_opened_files = 'all',
---   },
---   filters = {
---     dotfiles = true,
---   },
---   git = {
---     enable = true,
---     ignore = false,
---   },
--- }
+  -- config = true,
+  -- keys = { -- load the plugin only when using it's keybinding:
+  --   { '<leader>e', "<cmd>lua require('neotree').toggle()<cr>", desc = '[U]ndo tree' },
+  -- },
+}
+-- -- local api = require 'nvim-tree.api'
+-- --on_attach = function(bufnr)
+--         local gitsigns = require 'gitsigns'
 --
--- local api = require 'nvim-tree.api'
--- vim.keymap.set('n', '<leader>e', api.tree.toggle)
+--         local function map(mode, l, r, opts)
+--           opts = opts or {}
+--           opts.buffer = bufnr
+--           vim.keymap.set(mode, l, r, opts)
+--         end
+-- -- vim.keymap.set('n', '<leader>e', api.tree.toggle)
