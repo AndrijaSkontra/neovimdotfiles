@@ -467,10 +467,10 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
+        bashls = {},
         tsserver = {},
         angularls = {},
         -- sqlls = {},
-        bashls = {},
         --
 
         lua_ls = {
@@ -810,11 +810,11 @@ require('lazy').setup({
 -- vim.opt.guicursor = ''
 vim.api.nvim_set_keymap('n', '<A-j>', '<C-d>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<A-k>', '<C-u>zz', { noremap = true })
-vim.api.nvim_set_keymap('i', '<A-d>', '{', { noremap = true })
-vim.api.nvim_set_keymap('i', '<A-f>', '}', { noremap = true })
+-- vim.api.nvim_set_keymap('i', '<A-d>', '{', { noremap = true })
+-- vim.api.nvim_set_keymap('i', '<A-f>', '}', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
-vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'file tree toggle' })
+-- this doesn't work
+-- vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'file tree toggle' })
 
 -- Set tab and indent options for Lua files
 vim.api.nvim_create_autocmd('FileType', {
