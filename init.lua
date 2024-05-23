@@ -837,3 +837,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.expandtab = true
   end,
 })
+
+-- example of using autocmd, this doesnt really work though
+-- vim.api.nvim_create_autocmd('BufLeave', { command = 'w' })
+vim.opt.autowriteall = true
