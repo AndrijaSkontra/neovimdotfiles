@@ -1,3 +1,4 @@
+-- test comment
 --[[
   - help lua-guide
   - https://neovim.io/doc/user/lua-guide.html
