@@ -62,10 +62,11 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>t', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', '<leader>n', vim.diagnostic.goto_next, { desc = 'Go to [N]ext diagnostic message' })
+-- vim.keymap.set('n', '<leader>t', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>t', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.lsp.buf.code_action, { desc = 'Code Action aka quickfix' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -128,6 +129,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'github/copilot.vim',
   -- 'pocco81/auto-save.nvim',
 
   -- NOTE: Plugins can also be added by using a table,
@@ -460,7 +462,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -821,23 +823,23 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.api.nvim_set_keymap('n', '<leader>e', ':Neotree toggle current reveal_force_cwd<CR>', { noremap = true, silent = true })
 
 -- Set tab and indent options for Lua files
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'lua',
-  callback = function()
-    vim.bo.tabstop = 2
-    vim.bo.shiftwidth = 2
-    vim.bo.expandtab = true
-  end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'sh',
-  callback = function()
-    vim.bo.tabstop = 4
-    vim.bo.shiftwidth = 4
-    vim.bo.expandtab = true
-  end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'lua',
+--   callback = function()
+--     vim.bo.tabstop = 2
+--     vim.bo.shiftwidth = 2
+--     vim.bo.expandtab = true
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'sh',
+--   callback = function()
+--     vim.bo.tabstop = 4
+--     vim.bo.shiftwidth = 4
+--     vim.bo.expandtab = true
+--   end,
+-- })
 
 -- example of using autocmd, this doesnt really work though
 -- vim.api.nvim_create_autocmd('BufLeave', { command = 'w' })
