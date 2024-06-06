@@ -65,7 +65,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', '<leader>n', vim.diagnostic.goto_next, { desc = 'Go to [N]ext diagnostic message' })
 -- vim.keymap.set('n', '<leader>t', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>t', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>tq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('n', '<leader>q', vim.lsp.buf.code_action, { desc = 'Code Action aka quickfix' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -786,6 +786,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.comment',
+  require 'kickstart.plugins.toggleterm',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -828,7 +829,20 @@ vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 -- vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'file tree toggle' })
 vim.api.nvim_set_keymap('n', '<leader>e', ':Neotree toggle current reveal_force_cwd<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>b', ':ToggleTerm direction=float<CR>', { noremap = true, silent = true })
 
+-- Create a persistent terminal instance
+local Terminal = require('toggleterm.terminal').Terminal
+local float_term = Terminal:new { direction = 'float' }
+
+-- Function to toggle the terminal
+function _G.toggle_float_terminal()
+  float_term:toggle()
+end
+
+-- Set key mapping for ToggleTerm
+vim.api.nvim_set_keymap('n', '<M-i>', ':lua toggle_float_terminal()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<M-i>', '<C-\\><C-n>:lua toggle_float_terminal()<CR>', { noremap = true, silent = true })
 -- Set tab and indent options for Lua files
 -- vim.api.nvim_create_autocmd('FileType', {
 --   pattern = 'lua',
