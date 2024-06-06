@@ -823,6 +823,8 @@ require('lazy').setup({
 -- vim.opt.guicursor = ''
 vim.api.nvim_set_keymap('n', '<A-j>', '<C-d>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<A-k>', '<C-u>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-h>', '_', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-l>', '$', { noremap = true })
 -- vim.api.nvim_set_keymap('i', '<A-d>', '{', { noremap = true })
 -- vim.api.nvim_set_keymap('i', '<A-f>', '}', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
