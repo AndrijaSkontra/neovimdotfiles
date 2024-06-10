@@ -867,3 +867,24 @@ vim.api.nvim_set_keymap('t', '<M-i>', '<C-\\><C-n>:lua toggle_float_terminal()<C
 -- example of using autocmd, this doesnt really work though
 -- vim.api.nvim_create_autocmd('BufLeave', { command = 'w' })
 vim.opt.autowriteall = true
+
+-- Define the toggle function
+function toggle_copilot()
+  -- Check if Copilot is enabled by trying to get the current status
+  local copilot_status = vim.api.nvim_exec('Copilot status', true)
+
+  print 'changing copilot status...'
+
+  if copilot_status:match 'Copilot: Ready' then
+    -- If Copilot is enabled, disable it
+    vim.cmd 'Copilot disable'
+    print 'Copilot disabled'
+  else
+    -- If Copilot is disabled, enable it
+    vim.cmd 'Copilot enable'
+    print 'Copilot enabled'
+  end
+end
+
+-- Bind the function to <leader>ee
+vim.api.nvim_set_keymap('n', '<leader>kk', ':lua toggle_copilot()<CR>', { noremap = true, silent = true })
