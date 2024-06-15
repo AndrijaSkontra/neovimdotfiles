@@ -790,6 +790,7 @@ require('lazy').setup({
   require 'kickstart.plugins.toggleterm',
   require 'kickstart.plugins.refactor',
   require 'kickstart.plugins.commandp',
+  require 'kickstart.plugins.searchbox',
 
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
@@ -919,3 +920,6 @@ vim.diagnostic.config {
 }
 
 vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
+
+vim.keymap.set('n', '/', ':SearchBoxIncSearch<CR>')
+vim.keymap.set('n', '<leader>rp', ':SearchBoxReplace<CR>')
