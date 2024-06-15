@@ -789,6 +789,8 @@ require('lazy').setup({
   require 'kickstart.plugins.comment',
   require 'kickstart.plugins.toggleterm',
   require 'kickstart.plugins.refactor',
+  require 'kickstart.plugins.commandp',
+
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -901,3 +903,19 @@ vim.keymap.set('n', '<leader>rI', ':Refactor inline_func')
 
 vim.keymap.set('n', '<leader>rb', ':Refactor extract_block')
 vim.keymap.set('n', '<leader>rbf', ':Refactor extract_block_to_file')
+
+-- disable virtual_text (inline) diagnostics and use floating window
+-- format the message such that it shows source, message and
+-- the error code. Show the message with <space>e
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = true,
+  float = {
+    border = 'single',
+    format = function(diagnostic)
+      return string.format('%s (%s) [%s]', diagnostic.message, diagnostic.source, diagnostic.code or diagnostic.user_data.lsp.code)
+    end,
+  },
+}
+
+vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
