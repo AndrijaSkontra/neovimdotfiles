@@ -834,7 +834,7 @@ vim.api.nvim_set_keymap('n', '<A-l>', '$', { noremap = true })
 -- vim.api.nvim_set_keymap('i', '<A-d>', '{', { noremap = true })
 -- vim.api.nvim_set_keymap('i', '<A-f>', '}', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+-- vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 -- vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'file tree toggle' })
 vim.api.nvim_set_keymap('n', '<leader>e', ':Neotree toggle current reveal_force_cwd<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<leader>b', ':ToggleTerm direction=float<CR>', { noremap = true, silent = true })
@@ -924,3 +924,12 @@ vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
 
 vim.keymap.set('n', '/', ':SearchBoxIncSearch<CR>')
 vim.keymap.set('n', '<leader>rp', ':SearchBoxReplace<CR>')
+
+-- Map delete commands to yank to the 'a' register before deleting
+vim.api.nvim_set_keymap('n', 'd', '"ad', { noremap = true })
+vim.api.nvim_set_keymap('v', 'd', '"ad', { noremap = true })
+vim.api.nvim_set_keymap('n', 'dd', '"add', { noremap = true })
+
+-- Map <leader>p to paste from the 'a' register
+vim.api.nvim_set_keymap('n', '<leader>p', '"ap', { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>p', '"ap', { noremap = true })
