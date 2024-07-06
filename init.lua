@@ -482,6 +482,7 @@ require('lazy').setup({
         bashls = {},
         tsserver = {},
         angularls = {},
+        tailwindcss = {},
         -- sqlls = {},
         --
 
@@ -691,7 +692,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-day'
       -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
       -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 
@@ -744,7 +745,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'python', 'bash', 'angular', 'sql', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'python', 'bash', 'angular', 'sql', 'c', 'diff', 'tsx', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -792,6 +793,7 @@ require('lazy').setup({
   require 'kickstart.plugins.refactor',
   require 'kickstart.plugins.commandp',
   require 'kickstart.plugins.searchbox',
+  require 'kickstart.plugins.tailwind',
 
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
