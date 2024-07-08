@@ -130,12 +130,6 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'github/copilot.vim',
   'windwp/nvim-ts-autotag',
-  {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup()
-    end,
-  },
   -- {
   --   "ThePrimeagen/harpoon",
   --   branch = "harpoon2",
