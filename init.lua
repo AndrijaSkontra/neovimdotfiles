@@ -935,3 +935,23 @@ vim.api.nvim_set_keymap('n', 'dd', '"add', { noremap = true })
 -- Map <leader>p to paste from the 'a' register
 vim.api.nvim_set_keymap('n', '<leader>p', '"ap', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>p', '"ap', { noremap = true })
+
+-- Define the border style
+local border = {
+  { '╭', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '╮', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+  { '╯', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '╰', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+}
+
+-- Set up the hover handler with the border
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = border,
+})
+
+-- Map the 'K' key to the hover documentation function
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
