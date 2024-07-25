@@ -184,27 +184,27 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-      }
-      -- visual mode
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
-    end,
-  },
+  -- { -- Useful plugin to show you pending keybinds.
+  --   'folke/which-key.nvim',
+  --   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+  --   config = function() -- This is the function that runs, AFTER loading
+  --     require('which-key').setup()
+  --
+  --     -- Document existing key chains
+  --     require('which-key').register {
+  --       ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+  --       ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+  --       ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+  --       ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+  --       ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  --       ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+  --     }
+  --     -- visual mode
+  --     require('which-key').register({
+  --       ['<leader>h'] = { 'Git [H]unk' },
+  --     }, { mode = 'v' })
+  --   end,
+  -- },
 
   -- NOTE: Plugins can specify dependencies.
   --
@@ -877,24 +877,24 @@ end
 -- Set key mapping for ToggleTerm
 vim.api.nvim_set_keymap('n', '<M-i>', ':lua toggle_float_terminal()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<M-i>', '<C-\\><C-n>:lua toggle_float_terminal()<CR>', { noremap = true, silent = true })
--- Set tab and indent options for Lua files
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = 'lua',
---   callback = function()
---     vim.bo.tabstop = 2
---     vim.bo.shiftwidth = 2
---     vim.bo.expandtab = true
---   end,
--- })
---
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = 'sh',
---   callback = function()
---     vim.bo.tabstop = 4
---     vim.bo.shiftwidth = 4
---     vim.bo.expandtab = true
---   end,
--- })
+
+-- Set tab and indent options for TypeScript files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'typescript',
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'tsx',
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
 
 -- example of using autocmd, this doesnt really work though
 -- vim.api.nvim_create_autocmd('BufLeave', { command = 'w' })
@@ -920,6 +920,7 @@ end
 
 -- Bind the function to <leader>ee
 vim.api.nvim_set_keymap('n', '<leader>kk', ':lua toggle_copilot()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>kp', ':Copilot panel<CR>', { noremap = true, silent = true })
 vim.keymap.set('x', '<leader>re', ':Refactor extract ')
 vim.keymap.set('x', '<leader>rf', ':Refactor extract_to_file ')
 
@@ -979,3 +980,10 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 -- Map the 'K' key to the hover documentation function
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_command 'autocmd VimEnter * Copilot disable'
+
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.bo.softtabstop = 2
